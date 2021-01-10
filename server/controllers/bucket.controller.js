@@ -11,11 +11,9 @@ exports.getAll = async (req, res, next) => {
 
 exports.save = async (req, res, next) => {
     try {
-        let allBuckets = await BucketModel.find({}).exec();
-
         const Bucket = new BucketModel({
             name: req.body.formDetails.input,
-            code: req.body.formDetails.input[0].toUpperCase() + Number(allBuckets.length)+1
+            code: req.body.formDetails.input[0].toUpperCase() + new Date().getTime()
         })
 
         const result = await Bucket.save();
